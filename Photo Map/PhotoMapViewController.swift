@@ -13,7 +13,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet var cameraView: UIImageView!
     @IBOutlet var mapView: MKMapView!
     
-    var lastSelectedImage:UIImage?
+    var lastSelectedImage: UIImage?
     
     var imagePickerVC = UIImagePickerController()
 
@@ -59,8 +59,12 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        var vc = segue.destinationViewController as! LocationsViewController
-        vc.delegate = self
+        if segue.identifier == "showPictureSegue" {
+            (segue.destinationViewController as! FullSizeImageViewController).image = lastSelectedImage
+        } else {
+            var vc = segue.destinationViewController as! LocationsViewController
+            vc.delegate = self
+        }
     }
     
     func onImageSelectedWithLocation(lat:NSNumber, lng:NSNumber) {
@@ -85,6 +89,8 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
             annotationView.canShowCallout = true
             annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+
+            annotationView.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
         }
         
         if (self.lastSelectedImage != nil) {
@@ -95,5 +101,9 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         
         
         return annotationView
+    }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        performSegueWithIdentifier("showPictureSegue", sender: self)
     }
 }

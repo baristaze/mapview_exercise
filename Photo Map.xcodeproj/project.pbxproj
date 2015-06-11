@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		16D41F121B29271D00FF7088 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16D41F111B29271D00FF7088 /* MapKit.framework */; };
 		16D41F141B29275500FF7088 /* PhotoMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D41F131B29275500FF7088 /* PhotoMapViewController.swift */; };
+		16D41F161B293D5D00FF7088 /* FullSizeImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D41F151B293D5D00FF7088 /* FullSizeImageViewController.swift */; };
 		228D474F19F5DA9F00DE9903 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228D474E19F5DA9F00DE9903 /* AppDelegate.swift */; };
 		228D475419F5DA9F00DE9903 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228D475219F5DA9F00DE9903 /* Main.storyboard */; };
 		228D475619F5DA9F00DE9903 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 228D475519F5DA9F00DE9903 /* Images.xcassets */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		16D41F111B29271D00FF7088 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		16D41F131B29275500FF7088 /* PhotoMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoMapViewController.swift; sourceTree = "<group>"; };
+		16D41F151B293D5D00FF7088 /* FullSizeImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullSizeImageViewController.swift; sourceTree = "<group>"; };
 		2258D28219F5E60100F013CE /* Photo Map-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Photo Map-Bridging-Header.h"; sourceTree = "<group>"; };
 		228D474919F5DA9F00DE9903 /* Photo Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		228D474D19F5DA9F00DE9903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				228D476F19F5DAFF00DE9903 /* LocationsViewController.swift */,
 				16D41F131B29275500FF7088 /* PhotoMapViewController.swift */,
+				16D41F151B293D5D00FF7088 /* FullSizeImageViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				228D474F19F5DA9F00DE9903 /* AppDelegate.swift in Sources */,
 				16D41F141B29275500FF7088 /* PhotoMapViewController.swift in Sources */,
 				228D477019F5DAFF00DE9903 /* LocationsViewController.swift in Sources */,
+				16D41F161B293D5D00FF7088 /* FullSizeImageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
