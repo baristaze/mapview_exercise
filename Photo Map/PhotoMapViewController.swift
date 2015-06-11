@@ -70,6 +70,9 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     func onImageSelectedWithLocation(lat:NSNumber, lng:NSNumber) {
         println("location view returned a location")
         
+        mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat.doubleValue, longitude: lng.doubleValue), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)), animated: true)
+        
+        
         var locationCoordinate = CLLocationCoordinate2DMake(lat.doubleValue, lng.doubleValue)
         
         let annotation = MKPointAnnotation()
