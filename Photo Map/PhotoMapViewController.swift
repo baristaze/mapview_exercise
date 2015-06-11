@@ -9,9 +9,11 @@
 import UIKit
 import MapKit
 
-class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewDelegate, MKMapViewDelegate {
     @IBOutlet var cameraView: UIImageView!
     @IBOutlet var mapView: MKMapView!
+    
+    var lastSelectedImage:UIImage?
     
     var imagePickerVC = UIImagePickerController()
 
@@ -23,6 +25,8 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         cameraView.contentMode = UIViewContentMode.ScaleAspectFill
         
         mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.783333, longitude: -122.41666), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)), animated: true)
+        
+        mapView.delegate = self
         
         imagePickerVC.delegate = self
         imagePickerVC.allowsEditing = true
@@ -39,7 +43,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
             var originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
             var editedImage = info[UIImagePickerControllerEditedImage]as! UIImage
-            
+            self.lastSelectedImage = originalImage
             NSLog("here")
             dismissViewControllerAnimated(false, completion: nil)
             performSegueWithIdentifier("addLocationSegue", sender: self)
@@ -52,31 +56,44 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
             })
         }
     }
-    
-//    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-//        NSLog("here")
-//        dismissViewControllerAnimated(false, completion: nil)
-//        performSegueWithIdentifier("addLocationSegue", sender: self)
-//    }
-    
-//    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
-//        NSLog("here")
-//        dismissViewControllerAnimated(false, completion: nil)
-//        performSegueWithIdentifier("addLocationSegue", sender: self)
-//    }
-    
-//    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-//
-//    }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        var vc = segue.destinationViewController as! LocationsViewController
+        vc.delegate = self
     }
-    */
-
+    
+    func onImageSelectedWithLocation(lat:NSNumber, lng:NSNumber) {
+        println("location view returned a location")
+        
+        var locationCoordinate = CLLocationCoordinate2DMake(lat.doubleValue, lng.doubleValue)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = locationCoordinate
+        annotation.title = "\(lat), \(lng)"
+        mapView.addAnnotation(annotation)
+    }
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        
+        println("mapView delegate")
+        
+        let reuseID = "myAnnotationView"
+        
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID)
+        if (annotationView == nil) {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+            annotationView.canShowCallout = true
+            annotationView.leftCalloutAccessoryView = UIImageView(frame: CGRect(x:0, y:0, width: 50, height:50))
+        }
+        
+        if (self.lastSelectedImage != nil) {
+            let imageView = annotationView.leftCalloutAccessoryView as! UIImageView
+            imageView.image = self.lastSelectedImage!
+            // imageView.image = UIImage(named: "coolIcon")
+        }
+        
+        
+        return annotationView
+    }
 }
