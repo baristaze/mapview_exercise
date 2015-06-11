@@ -9,9 +9,11 @@
 import UIKit
 import MapKit
 
-class PhotoMapViewController: UIViewController {
+class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet var cameraView: UIImageView!
     @IBOutlet var mapView: MKMapView!
+    
+    var imagePickerVC = UIImagePickerController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,11 @@ class PhotoMapViewController: UIViewController {
         cameraView.contentMode = UIViewContentMode.ScaleAspectFill
         
         mapView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.783333, longitude: -122.41666), span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)), animated: true)
+        
+        imagePickerVC.delegate = self
+        imagePickerVC.allowsEditing = true
+        imagePickerVC.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,6 +35,39 @@ class PhotoMapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func imagePickerController(picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+            var originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+            var editedImage = info[UIImagePickerControllerEditedImage]as! UIImage
+            
+            NSLog("here")
+            dismissViewControllerAnimated(false, completion: nil)
+            performSegueWithIdentifier("addLocationSegue", sender: self)
+    }
+    
+    @IBAction func cameraButtonClicked(sender: AnyObject) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+            self.presentViewController(imagePickerVC, animated: false, completion: {
+                NSLog("presented camera roll!")
+            })
+        }
+    }
+    
+//    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+//        NSLog("here")
+//        dismissViewControllerAnimated(false, completion: nil)
+//        performSegueWithIdentifier("addLocationSegue", sender: self)
+//    }
+    
+//    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+//        NSLog("here")
+//        dismissViewControllerAnimated(false, completion: nil)
+//        performSegueWithIdentifier("addLocationSegue", sender: self)
+//    }
+    
+//    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+//
+//    }
 
     /*
     // MARK: - Navigation

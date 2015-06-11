@@ -22,18 +22,39 @@
                             </mapView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="vxO-fl-g6r">
                                 <rect key="frame" x="250" y="450" width="100" height="100"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                </accessibility>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="8hH-JX-F3a"/>
                                     <constraint firstAttribute="width" constant="100" id="AT2-hn-ywf"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="yVT-ov-xFL" appends="YES" id="5ar-WK-19q"/>
+                                </connections>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaE-3I-Zkc">
+                                <rect key="frame" x="250" y="460" width="100" height="90"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cameraButtonClicked:" destination="VQg-S2-qNb" eventType="touchUpInside" id="2SB-Pe-lbo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="V9a-Bn-H6Q" secondAttribute="trailing" id="03y-WJ-ZMI"/>
+                            <constraint firstItem="vxO-fl-g6r" firstAttribute="trailing" secondItem="vaE-3I-Zkc" secondAttribute="trailing" id="2g7-WC-vK7"/>
                             <constraint firstItem="V9a-Bn-H6Q" firstAttribute="top" secondItem="kDh-rO-UVD" secondAttribute="top" id="4LM-o5-95y"/>
                             <constraint firstAttribute="centerX" secondItem="vxO-fl-g6r" secondAttribute="centerX" id="EMO-bt-GI7"/>
+                            <constraint firstItem="vxO-fl-g6r" firstAttribute="top" secondItem="vaE-3I-Zkc" secondAttribute="top" constant="-10" id="GYH-cf-dV8"/>
                             <constraint firstItem="n61-Mv-eJb" firstAttribute="top" secondItem="vxO-fl-g6r" secondAttribute="bottom" constant="50" id="TIa-b9-g8V"/>
+                            <constraint firstItem="vxO-fl-g6r" firstAttribute="leading" secondItem="vaE-3I-Zkc" secondAttribute="leading" id="eFe-OZ-uHO"/>
+                            <constraint firstItem="vxO-fl-g6r" firstAttribute="bottom" secondItem="vaE-3I-Zkc" secondAttribute="bottom" id="end-MZ-9nI"/>
                             <constraint firstItem="n61-Mv-eJb" firstAttribute="top" secondItem="V9a-Bn-H6Q" secondAttribute="bottom" id="ov5-KX-Pvs"/>
                             <constraint firstItem="V9a-Bn-H6Q" firstAttribute="leading" secondItem="kDh-rO-UVD" secondAttribute="leading" id="zKO-V1-aPD"/>
                         </constraints>
@@ -41,11 +62,13 @@
                     <connections>
                         <outlet property="cameraView" destination="vxO-fl-g6r" id="GXX-qK-RB3"/>
                         <outlet property="mapView" destination="V9a-Bn-H6Q" id="5vJ-2F-IJH"/>
+                        <segue destination="eZf-Nb-6PU" kind="presentation" identifier="addLocationSegue" id="I8L-gF-sdP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cre-s8-eMb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="yVT-ov-xFL"/>
             </objects>
-            <point key="canvasLocation" x="559" y="-599"/>
+            <point key="canvasLocation" x="527" y="-713"/>
         </scene>
         <!--Add Location-->
         <scene sceneID="iO8-f3-thv">
@@ -174,4 +197,7 @@
     <resources>
         <image name="camera" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="I8L-gF-sdP"/>
+    </inferredMetricsTieBreakers>
 </document>
