@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CM3-Mn-D8D">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VQg-S2-qNb">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Photo Map View Controller-->
+        <scene sceneID="jhz-Go-XQb">
+            <objects>
+                <viewController id="VQg-S2-qNb" customClass="PhotoMapViewController" customModule="Photo_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mq8-sH-CCj"/>
+                        <viewControllerLayoutGuide type="bottom" id="n61-Mv-eJb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kDh-rO-UVD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="V9a-Bn-H6Q">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="vxO-fl-g6r">
+                                <rect key="frame" x="250" y="450" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="8hH-JX-F3a"/>
+                                    <constraint firstAttribute="width" constant="100" id="AT2-hn-ywf"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="V9a-Bn-H6Q" secondAttribute="trailing" id="03y-WJ-ZMI"/>
+                            <constraint firstItem="V9a-Bn-H6Q" firstAttribute="top" secondItem="kDh-rO-UVD" secondAttribute="top" id="4LM-o5-95y"/>
+                            <constraint firstAttribute="centerX" secondItem="vxO-fl-g6r" secondAttribute="centerX" id="EMO-bt-GI7"/>
+                            <constraint firstItem="n61-Mv-eJb" firstAttribute="top" secondItem="vxO-fl-g6r" secondAttribute="bottom" constant="50" id="TIa-b9-g8V"/>
+                            <constraint firstItem="n61-Mv-eJb" firstAttribute="top" secondItem="V9a-Bn-H6Q" secondAttribute="bottom" id="ov5-KX-Pvs"/>
+                            <constraint firstItem="V9a-Bn-H6Q" firstAttribute="leading" secondItem="kDh-rO-UVD" secondAttribute="leading" id="zKO-V1-aPD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cameraView" destination="vxO-fl-g6r" id="GXX-qK-RB3"/>
+                        <outlet property="mapView" destination="V9a-Bn-H6Q" id="5vJ-2F-IJH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cre-s8-eMb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="559" y="-599"/>
+        </scene>
         <!--Add Location-->
         <scene sceneID="iO8-f3-thv">
             <objects>
@@ -129,4 +171,7 @@
             <point key="canvasLocation" x="195" y="-3"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" width="64" height="64"/>
+    </resources>
 </document>
